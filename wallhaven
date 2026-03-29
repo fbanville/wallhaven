@@ -212,12 +212,16 @@ download_file() {
 	local url="$1"
 	local output="$2"
 
-	if command -v curl >/dev/null 2>&1; then
+	if command -v aria2c >/dev/null 2>&1; then
+		aria2c -q --out="$(basename "$output")" --dir="$(dirname "$output")" "$url"
+	elif command -v curl >/dev/null 2>&1; then
 		curl -sL "$url" -o "$output"
+	elif command -v wget2 >/dev/null 2>&1; then
+		wget2 -q "$url" -O "$output"
 	elif command -v wget >/dev/null 2>&1; then
 		wget -q "$url" -O "$output"
 	else
-		printf "Error: No download tool found. Install curl or wget\n" >&2
+		printf "Error: No download tool found. Install curl, wget, or aria2c\n" >&2
 		return 1
 	fi
 }
@@ -243,6 +247,8 @@ api_request() {
 
 	if command -v curl >/dev/null 2>&1; then
 		curl -s "$url"
+	elif command -v wget2 >/dev/null 2>&1; then
+		wget2 -qO- "$url"
 	elif command -v wget >/dev/null 2>&1; then
 		wget -qO- "$url"
 	else

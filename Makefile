@@ -131,10 +131,13 @@ test:
 		exit 1; \
 	fi
 	@echo "Script syntax OK"
-	@if command -v curl >/dev/null 2>&1 || command -v wget >/dev/null 2>&1; then \
+	@if command -v curl >/dev/null 2>&1 || command -v wget2 >/dev/null 2>&1 || command -v wget >/dev/null 2>&1; then \
 		echo "HTTP client available"; \
 	else \
-		echo "Warning: No HTTP client found (install curl or wget)"; \
+		echo "Warning: No HTTP client found (install curl, wget, or wget2)"; \
+	fi
+	@if command -v aria2c >/dev/null 2>&1; then \
+		echo "aria2c available (faster downloads)"; \
 	fi
 ifeq ($(UNAME_S),Darwin)
 	@if command -v osascript >/dev/null 2>&1; then \
