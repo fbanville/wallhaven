@@ -1,29 +1,47 @@
 # wallhaven configuration
-# Copy this to ~/.config/wallhaven/config or edit the script directly
+# Copy this to ~/.config/wallhaven/config (auto-sourced by the script)
+# CLI flags override these values
 
 # Optional API key for NSFW content and higher rate limits
 # Get yours from: https://wallhaven.cc/settings/account
-#API_KEY="your_api_key_here"
+#API_KEY=""
 
-# Wallpaper preferences
-CATEGORIES="111"    # 111=all, 100=general, 010=anime, 001=people
-PURITY="100"        # 100=SFW, 110=SFW+sketchy, 111=all (needs API key)
+# Categories: combine bits for general/anime/people (1=enabled, 0=disabled)
+CATEGORIES="111"    # 111=all, 100=general only, 010=anime only, 001=people only
+
+# Purity filter
+PURITY="100"        # 100=SFW, 110=SFW+sketchy, 111=all (requires API key)
+
+# Sorting method
 SORTING="random"    # random, date_added, views, favorites, toplist
-ATLEAST=""          # minimum resolution, e.g., "1920x1080"
-RATIOS=""           # aspect ratios, e.g., "16x9,16x10"
+
+# Sort order
+#ORDER=""           # desc (default), asc
+
+# Top range — only applies when SORTING="toplist"
+#TOPRANGE=""        # 1d, 3d, 1w, 1M, 3M, 6M, 1y
+
+# Minimum resolution (at least this size)
+#ATLEAST=""         # e.g., "1920x1080", "3840x2160"
+
+# Exact resolutions (comma-separated)
+#RESOLUTIONS=""     # e.g., "1920x1080,2560x1440"
+
+# Aspect ratios (comma-separated)
+#RATIOS=""          # e.g., "16x9", "16x10", "21x9"
+
+# Search by dominant color (hex without #)
+#COLORS=""          # e.g., "660000" for red
+
+# Starting page for results
+#PAGE=""            # default: 1
+
+# Seed for consistent random results (6 alphanumeric chars)
+# Only applies when SORTING="random"
+#SEED=""
+
+# Number of pages to fetch when using -x random selection
+NUM_PAGES=1         # increase for a larger random pool (e.g., 3 = up to 72 results)
 
 # Directory for downloaded wallpapers
 WALLDIR="${HOME}/.cache/wallhaven"
-
-# Examples of different configurations:
-# For 4K users:
-# ATLEAST="3840x2160"
-
-# For ultrawide monitors:
-# RATIOS="21x9"
-
-# For anime wallpapers only:
-# CATEGORIES="010"
-
-# For top-rated wallpapers:
-# SORTING="toplist"
