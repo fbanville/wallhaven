@@ -42,6 +42,7 @@ SORTING="random"    # random, date_added, views, favorites, toplist
 
 # Number of pages to fetch when using -x random selection
 NUM_PAGES=1         # increase for a larger random pool (e.g., 3 = up to 72 results)
+#RANDOM_SELECT=0    # set to 1 to always pick randomly (equivalent to -x flag)
 
 # Directory for downloaded wallpapers
 WALLDIR="${HOME}/.cache/wallhaven"
