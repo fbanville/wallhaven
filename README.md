@@ -21,13 +21,14 @@ Or manually:
 
 ## Usage
 
-    wallhaven                    # random wallpaper
-    wallhaven nature landscape   # search terms
-    wallhaven -r 1920x1080       # minimum resolution
-    wallhaven -c 010 anime       # anime category only
-    wallhaven -s toplist -x      # random from top-rated
-    wallhaven -d sunset          # download only
-    wallhaven -V                 # visual selection with wallrs
+    wallhaven                           # random wallpaper
+    wallhaven nature landscape          # search terms
+    wallhaven -r 1920x1080              # minimum resolution
+    wallhaven -c 010                    # anime category only
+    wallhaven -s toplist -x             # random from top-rated
+    wallhaven -s toplist -t 1M -x -n 5  # random from top 120 (5 pages)
+    wallhaven -d sunset                 # download only
+    wallhaven -V                        # visual selection with wallrs
 
 Options:
 
@@ -44,11 +45,34 @@ Options:
     -P PAGE         page number (default: 1)
     -S SEED         6 alphanumeric chars for reproducible random
     -k API_KEY      API key for authenticated requests
+    -n NUM_PAGES    pages to fetch for -x random pool (default: 1)
     -x              random from results (not just first)
     -d              download only, don't set
     -V              visual selection mode (requires wallrs)
     -l              list downloaded wallpapers
     -X              clean cache
+
+## Configuration
+
+Copy `config.example` to `~/.config/wallhaven/config` — it is automatically sourced on startup. CLI flags override config values.
+
+    cp config.example ~/.config/wallhaven/config
+
+Key settings:
+
+    CATEGORIES="111"    # 111=all, 100=general, 010=anime, 001=people
+    PURITY="100"        # 100=SFW, 110=SFW+sketchy, 111=all
+    SORTING="random"    # random, date_added, views, favorites, toplist
+    TOPRANGE="1M"       # requires SORTING=toplist
+    ATLEAST="1920x1080" # minimum resolution
+    RATIOS="16x9"       # aspect ratio filter
+    NUM_PAGES=1         # pages to pool for random selection
+    RANDOM_SELECT=1     # always pick randomly (equivalent to -x)
+    API_KEY=""          # for NSFW content and higher rate limits
+
+An API key can be obtained at https://wallhaven.cc/settings/account.
+
+Cache is stored in `~/.cache/wallhaven/`.
 
 ## Automatic Changes
 
@@ -73,10 +97,6 @@ To uninstall:
 
     launchctl unload ~/Library/LaunchAgents/com.wallhaven.plist
     rm ~/Library/LaunchAgents/com.wallhaven.plist
-
-## Configuration
-
-Edit the script to set API key and defaults. Cache: ~/.cache/wallhaven/
 
 ## License
 
