@@ -252,7 +252,7 @@ api_request() {
 		curl -s --user-agent="$USER_AGENT" "$url"
 	elif command -v wget2 >/dev/null 2>&1; then
 		wget2 --user-agent="$USER_AGENT" -qO- "$url"
-	elif command -v --user-agent="$USER_AGENT" wget >/dev/null 2>&1; then
+	elif command -v wget >/dev/null 2>&1; then
 		wget --user-agent="$USER_AGENT" -qO- "$url"
 	else
 		printf "Error: No HTTP tool found. Install curl or wget\n" >&2
